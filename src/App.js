@@ -1,75 +1,38 @@
 import React from "react";
 import PropTypes from 'prop-types';
 
-const foodILike = [
-  {
-    id:1,
-    name: "Kimchi",
-    image:
-      "http://aeriskitchen.com/wp-content/uploads/2008/09/kimchi_bokkeumbap_02-.jpg",
-    rating: 1
 
-  },
-  {
-    id:2,
-    name: "Samgyeopsal",
-    image:
-      "https://3.bp.blogspot.com/-hKwIBxIVcQw/WfsewX3fhJI/AAAAAAAAALk/yHxnxFXcfx4ZKSfHS_RQNKjw3bAC03AnACLcBGAs/s400/DSC07624.jpg",
-    rating: 4
-  },
-  {
-    id:3,
-    name: "Bibimbap",
-    image:
-      "http://cdn-image.myrecipes.com/sites/default/files/styles/4_3_horizontal_-_1200x900/public/image/recipes/ck/12/03/bibimbop-ck-x.jpg?itok=RoXlp6Xb",
-    rating: 3.5
-
-  },
-  {
-    id:4,
-    name: "Doncasu",
-    image:
-      "https://s3-media3.fl.yelpcdn.com/bphoto/7F9eTTQ_yxaWIRytAu5feA/ls.jpg",
-    rating: 5
-  },
-  {
-    id:5,
-    name: "Kimbap",
-    image:
-      "http://cdn2.koreanbapsang.com/wp-content/uploads/2012/05/DSC_1238r-e1454170512295.jpg",
-    rating: 3
+class App extends React.Component{
+  // return 이 없다. React.component에 render method를 가져온다.
+  // class-는 클래스인데 보여주기 위해서는 render method안에 넣어줘야한다. 리엑트는 자동으로 class component안에 render method를 자동으로 렌더링한다.
+  state = {
+    //변하는 state는 여기에 넣는다. 바꾸고싶은 데이터를 넣는거다.
+    count: 0
   }
-];
+  add = (current) => {
+    console.log('add');
+    // this.setState({ count: this.state.count + 1 });
+    this.setState(current => ({ count: current.count + 1 }));
+  }
+  minus = () => { 
+    console.log('minus');
+    // this.setState({ count: this.state.count - 1})
+    this.setState(current => ({ count: current.count - 1 }));
+    // render 가 다시 호출되어야한다. 그래서 'set'state. setState은 새로운 state으로 render를 호출한다.
+    // current 사용하기
+  }
 
-function Food ({ name, picture, rating }){
-  // console.log(props.something)
-  return (
-  <div>
-   <h1>I like {name}</h1>
-   <h4>{rating}/5.0</h4>
-   <img src={picture} alt={name}/>
-  </div>
-  );
+
+  render() {
+    return (
+      <div>
+        <h1>The number is : {this.state.count}</h1>
+        <button onClick={this.minus}>minus</button>
+        <button onClick={this.add}>add</button>
+      </div>
+    )
+  }
 }
 
-Food.propTypes = {
-  name: PropTypes.string.isRequired,
-  picture: PropTypes.string.isRequired,
-  rating: PropTypes.number.isRequired
-}
-
-function App() {
-  return (
-    <div>
-      {foodILike.map(dish => (
-        <Food name = {dish.name} picture = {dish.image} alt = {dish.name} key = {dish.id} rating = {dish.rating}/>
-        // key is used for React internal use
-      ))}
-    </div>
-  );
-}
-
-
-// component is a functions that returns HTML!
 export default App;
 
