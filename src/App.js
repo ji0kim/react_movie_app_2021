@@ -2,6 +2,7 @@ import React from "react";
 // import PropTypes from 'prop-types';
 import axios from "axios";
 import Movie from './movie';
+import "./css/Movie.css"
 
 class App extends React.Component {
   // return 이 없다. React.component에 render method를 가져온다. class-는 클래스인데 보여주기 위해서는 render method안에 넣어줘야한다. 리엑트는 자동으로 class component안에 render method를 자동으로 렌더링한다
@@ -36,24 +37,28 @@ class App extends React.Component {
     } = this.state;
     return (
     <div> 
-      {isLoading ? "loading" 
-      : movies.map(movie => {
-        console.log(movie);
-        return (
-          <Movie 
-          key = {movie.id}
-          id = {movie.id} 
-          year = {movie.year} 
-          title = {movie.title}
-          summary = {movie.summary} 
-          poster = {movie.medium_cover_image}
-        />
+      {isLoading ? (
+        <div className = "loader">
+          <span className ="loader__text">loading</span>
+        </div>
+        ) : ( 
+          <div className = "movies">
+            {movies.map(movie => (
+            <Movie 
+              key = {movie.id}
+              id = {movie.id} 
+              year = {movie.year} 
+              title = {movie.title}
+              summary = {movie.summary} 
+              poster = {movie.medium_cover_image}
+              genres = {movie.genres}
+            />
+            ))}
+          </div> 
         )
-        
-      })
-    } 
+      } 
     </div>
-    )
+  )
   // react component does
   // mouting - being born
   // Updating - updating
