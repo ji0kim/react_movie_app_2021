@@ -6,16 +6,18 @@ function Movie ({id, year, title, summary, poster, genres}){
   return (
     <div className = "movie">
     <img className="movie__poster" src={poster} alt={title} title ={title}/>
-    <h3 className="movie__title">{title}</h3>
-    <span>{year}</span>
-    <ul className="genres">
-      {genres.map((genre, index) =>
-        <li className="genres__genre" key={index}>{genre}</li>
-        )
-      }
-      {/* map의 각각 item에는 key 값이 필요하다. map 에는 index를 쓸수있다. */}
-    </ul>
-    <h5 className="movie__summary">{summary}</h5>
+    <div>
+      <h3 className="movie__title">{title}</h3>
+      <span className="movie__year">{year}</span>
+      <ul className="movie__genres">
+        {genres.map((genre, index) =>
+          <li className="genres__genre" key={index}>{genre}</li>
+          )
+        }
+        {/* map의 각각 item에는 key 값이 필요하다. map 에는 index를 쓸수있다. */}
+      </ul>
+      <p className="movie__summary">{summary.slice(0, 180)}</p>
+    </div>
     </div>
   )
 }
